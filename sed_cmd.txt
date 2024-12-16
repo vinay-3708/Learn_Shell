@@ -1,0 +1,39 @@
+
+
+#The sed (Stream Editor) command is used for text manipulation and editing in files or streams without opening them in a text editor. It is widely used in automation, scripting, and log processing.
+#Basic Syntax is:
+#   sed [options] 'script' [file...]
+
+
+#Replace the nth occurance of keyword with new keyword in each line
+sed 's/old_kw/new_kw/3' example.txt   #This will replaces the 3rd old_kw with new_kw in each line of file.
+
+#Replace all occurrences in a line
+sed 's/old/new/g' file
+
+#Replace a String Only on Specific Lines ,i.e from 2 to 4.
+sed '2,4s/old/new/' file
+
+#use -i option to store the changes directly into the file
+sed 's/old/new/g' file
+
+#Delete a specific line number. The below will delete the 5th line and prints the remaining.
+sed '5d' file  
+
+#Delete range of lines from 2 to 5 in a file
+sed '2,5d' file
+
+#Delete lines matching a pattern
+sed '/pattern/d' file
+
+#Print any specific line. The below will print line 5.
+sed -n '5p' file
+
+#Print range of lines
+sed -n '2,5p' file
+
+#Print matched lines
+sed -n '/pattern/p' file
+
+
+#NOTE: Instead of '/', we can use any delimiter like '|' or anyother
