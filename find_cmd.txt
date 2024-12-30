@@ -1,0 +1,49 @@
+The find command is used to search for files and directories in a directory hierarchy based on conditions like name, type, size, modification time, and permissions.
+
+Basic Syntax:
+find [path] [options] [expression]
+
+
+#Find a file based on name
+find /path/to/directory -type f -name "NAME_OF_THE_FILE"
+
+
+#Find a directory based on name
+find /path/to/directory -type d -name "NAME_OF_THE_FOLDER"
+
+
+#Find the file/directory which has the size more than 100MB
+find /path/to/directory -size +100M
+
+
+#Find the file/directory which has the size less than 100MB
+find /path/to/directory -size -100M
+
+
+
+#Find the file/directory which has the size between 100-200MB
+find /path/to/directory -size +100M -size -200M
+
+
+#Any command needs to run on each file from find output. Lets say you want to remove files less than 50MB. find /path/to/search -name "pattern" -exec command {} \;
+find /path/to/directory -size -100M -exec rm {}
+
+
+#Search for Files by Modified Time. Find all files modified in the last 7 days in /etc
+find /etc -mtime -7
+
+
+#Based on access time. Find files not accessed in the last 30 days in /home
+find /home -atime +30
+
+
+#Based on permissions assigned on files. Find all files with 777 permissions in /var/www.
+find /var/www -perm 777
+
+
+#Find all files created in the last 2 days.
+find / -ctime -2
+
+
+#Based on user. Find all files owned by the user john
+find / -user john
