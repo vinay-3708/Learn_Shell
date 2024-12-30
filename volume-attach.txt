@@ -1,0 +1,31 @@
+#Creating a Volume and attach to VM:
+
+To list the attached volumes in the VM:
+"lsblk"
+
+
+To list the file-systems present in VM:
+"fdisk -l"   or  "df -h"
+
+
+Create a file-system using the below command:
+sudo mkfs.ext4 /dev/sdX        #/dev/sdX is the Volume name in lsblk
+
+
+Mount the volume to a directory:
+sudo mount /dev/sdX /mnt/newVolume 
+
+
+Make the attachment always attached to VM when re-booted: Add the below line to /etc/fstab
+echo '/dev/sdX /mnt/myvolume ext4 defaults 0 0' | sudo tee -a /etc/fstab
+
+
+
+
+#Unmounting the volume:
+
+To unmount volume:
+sudo umount /dev/sdX /mnt/newVolume
+
+
+And Delete the line in /etc/fstab
