@@ -1,0 +1,46 @@
+To list the attached volumes in the VM:
+"lsblk"
+
+
+To list the file-systems present in VM:
+"fdisk -l"   or  "df -h"
+
+
+
+Install the LVM using lvm2 package
+
+
+#Create a Physical volumes
+pvcreate /disk/path        #Disk path can be obtained from the above lsblk output.
+
+
+#List the Physical volumes
+pvdisplay
+
+
+#Create Volume groups using the above created pv:
+vgcreate <vg_name> /dev/sdX /dev/sdY      #/dev/sdX and /dev/sdY will be obtained from pvdisplay
+
+
+#List the Volumegroups
+vgdisplay
+
+
+#Create a logical volume:
+lvcreate -L <size> -n <lv_name> <vg_name>
+
+
+#List the lv's
+lvdisplay
+
+
+#Create FileSystems
+mkfs.ext4 /dev/<vg>/<lv>
+
+
+Mount the volume to a directory:
+mount /dev/<vg_name>/<lv_name> /mnt/<mount_point>
+
+
+Make the attachment always attached to VM when re-booted: Add the below line to /etc/fstab
+echo '/dev/<vg_name>/<lv_name> /mnt/<mount_point> ext4 defaults 0 0' | sudo tee -a /etc/fstab
