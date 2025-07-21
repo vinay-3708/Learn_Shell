@@ -1,0 +1,20 @@
+# To send standard output to a log file
+your_command > log_file     # This will re-write log file everytime as fresh
+your_command >> log_file     # Appends the log file
+
+
+
+#To re-direct stderr
+your_command 2> log_file    # This will re-write log file everytime as fresh with error outputs
+your_command 2>> log_file     # Appends the log file with error outputs
+
+
+#Do a script that will create log file for your std output with custom format like DATE - USER - STDOUTPUT
+your_command | while IFS= read line
+do
+  echo "$(date '+%Y-%m-%d') - $(whoami) - ${line}" >> test.log
+done
+
+
+
+#your_command can be any script or command
